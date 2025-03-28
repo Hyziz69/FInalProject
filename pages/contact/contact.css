@@ -1,0 +1,113 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #ebe9e1; /* Light beige */
+  color: #4d4d3d; /* Muted dark green-gray */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contact-container {
+  width: 400px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+.go-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  border: none;
+  color: #5a5a3e; /* Darker olive green */
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.go-back:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 24px;
+  color: #5a5a3e;
+  margin-bottom: 10px;
+}
+
+.subtext {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5a5a3e;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #f8f8f2;
+  color: #333;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #8d8b74;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #a2a08d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.btn-submit:hover {
+  background-color: #8d8b74;
+}
+
+.contact-info {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #5a5a3e;
+}
+
+.contact-info a {
+  color: #8d8b74;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}

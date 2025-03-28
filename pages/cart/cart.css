@@ -1,0 +1,136 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5ef; /* Soft warm beige */
+  color: #4d4d3d; /* Muted dark green-gray */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 800px; /* Increased width */
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.go-back {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: transparent;
+  border: none;
+  color: #5a5a3e; /* Darker olive green */
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.go-back:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 24px;
+  color: #5a5a3e; /* Darker olive green */
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.empty-message {
+  text-align: center;
+  color: #999;
+  font-size: 16px;
+}
+
+.items {
+  margin-top: 15px;
+}
+
+.item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8f8f2;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 10px;
+}
+
+.item-card h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.item-card p {
+  font-size: 14px;
+  color: #666;
+  margin: 2px 0;
+}
+
+.item-card strong {
+  color: #4d4d3d;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+}
+
+.remove-btn {
+  padding: 8px 12px;
+  background-color: #a2a08d; /* Earthy muted green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #8d8b74;
+}
+
+.total {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn {
+  width: 30%;
+  padding: 12px;
+  background-color: #a2a08d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background-color: #8d8b74;
+}
+
+.clear-cart-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
