@@ -89,6 +89,7 @@ h1 {
 }
 
 .remove-btn {
+  margin-right: 10px;
   padding: 8px 12px;
   background-color: #a2a08d;
   color: white;

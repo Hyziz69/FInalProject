@@ -1,5 +1,12 @@
 <?php 
   require_once('tools/functions.php');
+  require_once('classes/Clothes.php');
+  require_once ('classes/ClothesManager.php');
+  
+  $clothesManager = new ClothesManager($conn);
+  $leatherItems = $clothesManager->getClothesByType('leather'); 
+  $newArrivals = $clothesManager->getClothesByType('newArrival');
+  $bestSelling = $clothesManager->getClothesByType('bestSelling');
 ?>
 
 <!DOCTYPE html>
@@ -295,114 +302,24 @@
       <div class="row">
         <div class="swiper main-swiper py-4" data-aos="fade-up" data-aos-delay="600">
           <div class="swiper-wrapper d-flex border-animation-left">
-            <div class="swiper-slide">
+            <?php foreach($leatherItems as $leatherItem){ ?>
+              <div class="swiper-slide">
               <div class="banner-item image-zoom-effect">
                 <div class="image-holder">
-                  <a href="#">
-                    <img src="images/banner-image-6.jpg" alt="product" class="img-fluid">
+                  <a href="clothing.php?id=<?= $leatherItem->id ?>">
+                    <img src="images/<?= $leatherItem->image?>" alt="product" class="img-fluid">
                   </a>
                 </div>
                 <div class="banner-content py-4">
                   <h5 class="element-title text-uppercase">
-                    <a href="index.html" class="item-anchor">Soft leather jackets</a>
+                    <p class="item-anchor"><?php echo $leatherItem->name ?></p>
                   </h5>
-                  <p>Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.</p>
-                  <div class="btn-left">
-                    <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
-                  </div>
+                  <p><?php echo $leatherItem->description ?></p>
                 </div>
               </div>
             </div>
-            <div class="swiper-slide">
-              <div class="banner-item image-zoom-effect">
-                <div class="image-holder">
-                  <a href="#">
-                    <img src="images/banner-image-1.jpg" alt="product" class="img-fluid">
-                  </a>
-                </div>
-                <div class="banner-content py-4">
-                  <h5 class="element-title text-uppercase">
-                    <a href="index.html" class="item-anchor">Soft leather jackets</a>
-                  </h5>
-                  <p>Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.</p>
-                  <div class="btn-left">
-                    <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="banner-item image-zoom-effect">
-                <div class="image-holder">
-                  <a href="#">
-                    <img src="images/banner-image-2.jpg" alt="product" class="img-fluid">
-                  </a>
-                </div>
-                <div class="banner-content py-4">
-                  <h5 class="element-title text-uppercase">
-                    <a href="index.html" class="item-anchor">Soft leather jackets</a>
-                  </h5>
-                  <p>Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.</p>
-                  <div class="btn-left">
-                    <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="banner-item image-zoom-effect">
-                <div class="image-holder">
-                  <a href="#">
-                    <img src="images/banner-image-3.jpg" alt="product" class="img-fluid">
-                  </a>
-                </div>
-                <div class="banner-content py-4">
-                  <h5 class="element-title text-uppercase">
-                    <a href="index.html" class="item-anchor">Soft leather jackets</a>
-                  </h5>
-                  <p>Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.</p>
-                  <div class="btn-left">
-                    <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="banner-item image-zoom-effect">
-                <div class="image-holder">
-                  <a href="#">
-                    <img src="images/banner-image-4.jpg" alt="product" class="img-fluid">
-                  </a>
-                </div>
-                <div class="banner-content py-4">
-                  <h5 class="element-title text-uppercase">
-                    <a href="index.html" class="item-anchor">Out crop sweater</a>
-                  </h5>
-                  <p>Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.</p>
-                  <div class="btn-left">
-                    <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="banner-item image-zoom-effect">
-                <div class="image-holder">
-                  <a href="#">
-                    <img src="images/banner-image-5.jpg" alt="product" class="img-fluid">
-                  </a>
-                </div>
-                <div class="banner-content py-4">
-                  <h5 class="element-title text-uppercase">
-                    <a href="index.html" class="item-anchor">Soft leather jackets</a>
-                  </h5>
-                  <p>Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.</p>
-                  <div class="btn-left">
-                    <a href="#" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?php } ?>
+           
           </div>
           <div class="swiper-pagination"></div>
         </div>
@@ -518,106 +435,39 @@
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
-          <div class="swiper-slide">
+          <?php foreach($newArrivals as $newArrival){ ?>
+            <div class="swiper-slide">
             <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-1.jpg" alt="categories" class="product-image img-fluid">
+              <div class="image-holder">
+                <a href="clothing.php?id=<?= $newArrival->id ?>">
+                  <img src="images/<?=$newArrival->image ?>" alt="<?= $newArrival->name ?>" class="product-image img-fluid">
                 </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="element-title text-uppercase fs-5 mt-3">
-                    <a href="index.html">Dark florish onepiece</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Add to cart"><span>$95.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-2.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
+                <form action="wishlist/wishlist-manage/add-to-wishlist.php" method="POST">
+                  <input type="hidden" name="product_id" value="<?= $newArrival->id ?>">
+                  <input type="hidden" name="product_name" value="<?= $newArrival->name ?>">
+                  <input type="hidden" name="product_price" value="<?= $newArrival->price ?>">
+                  <button type="submit" class="btn-icon btn-wishlist border-0">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                      <use xlink:href="#heart"></use>
+                    </svg>
+                  </button>
+                </form>
                 <div class="product-content">
                   <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Baggy Shirt</a>
+                    <a href="index.html"><?php echo $newArrival->name ?></a>
                   </h5>
-                  <a href="#" class="text-decoration-none" data-after="Add to cart"><span>$55.00</span></a>
+                  <p href="index.html" class="text-decoration-none" data-after="Add to cart"><span><?php echo $newArrival->price . "€"?></span></p>
+                  <form action="cart/cart-manage/add-to-cart.php" method="POST">
+                    <input type="hidden" name="id" value="<?= $newArrival->id ?>">
+                    <input type="hidden" name="name" value="<?= $newArrival->name ?>">
+                    <input type="hidden" name="price" value="<?= $newArrival->price ?>">
+                    <button class="border-0 rounded bg-black text-white">Add to cart</button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-3.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Cotton off-white shirt</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Add to cart"><span>$65.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-4.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Crop sweater</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Add to cart"><span>$50.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder position-relative">
-                <a href="index.html">
-                  <img src="images/product-item-10.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Crop sweater</a>
-                  </h5>
-                  <a href="#" class="text-decoration-none" data-after="Add to cart"><span>$70.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -663,126 +513,30 @@
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
-          <div class="swiper-slide">
+          <?php foreach($bestSelling as $bestSellingItem){ ?>
+            <div class="swiper-slide">
             <div class="product-item image-zoom-effect link-effect">
               <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-4.jpg" alt="categories" class="product-image img-fluid">
+                <a href="clothing.php?id=<?= $bestSellingItem->id ?>">
+                  <img src="images/<?=$bestSellingItem->image ?>" alt="<?= $bestSellingItem->name ?>" class="product-image img-fluid">
                 </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
+                <form action="">
+                  <button type="submit" class="btn-icon btn-wishlist border-0">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                      <use xlink:href="#heart"></use>
+                    </svg>
+                  </button>
+                </form>
                 <div class="product-content">
                   <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Dark florish onepiece</a>
+                    <a href="index.html"><?php echo $bestSellingItem->name ?></a>
                   </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$95.00</span></a>
+                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span><?php echo $bestSellingItem->price . "€"?></span></a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-3.jpg" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Baggy Shirt</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$55.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-5.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Cotton off-white shirt</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$65.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-6.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Handmade crop sweater</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$50.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-9.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Dark florish onepiece</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$70.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-10.jpg" alt="categories" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Cotton off-white shirt</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$70.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -857,127 +611,6 @@
     </div>
     <div class="testimonial-swiper-pagination d-flex justify-content-center mb-5"></div>
   </section>
-
-  <section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
-    <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-        <h4 class="text-uppercase">You May Also Like</h4>
-        <a href="index.html" class="btn-link">View All Products</a>
-      </div>
-      <div class="swiper product-swiper open-up" data-aos="zoom-out">
-        <div class="swiper-wrapper d-flex">
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-5.jpg" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Dark florish onepiece</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$95.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-6.jpg" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Baggy Shirt</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$55.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-7.jpg" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Cotton off-white shirt</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$65.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-8.jpg" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Handmade crop sweater</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$50.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="images/product-item-1.jpg" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="index.html" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="index.html">Handmade crop sweater</a>
-                  </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$70.00</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-      <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-left"></use>
-        </svg></div>
-      <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-right"></use>
-        </svg></div>
-    </div>
-  </section>
-
   <section class="blog py-5">
     <div class="container">
       <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
@@ -1068,8 +701,8 @@
             <h3 class="section-title text-uppercase">Sign Up for our newsletter</h3>
           </div>
           <form id="form" class="d-flex flex-wrap gap-2">
-            <input type="text" name="email" placeholder="Your Email Addresss" class="form-control form-control-lg">
-            <button class="btn btn-dark btn-lg text-uppercase w-100">Sign Up</button>
+            <input type="email" name="email" placeholder="Your Email Addresss" class="form-control form-control-lg">
+            <button type="submit" class="btn btn-dark btn-lg text-uppercase w-100" id="userEmail" onclick="sendEmail()">Sign up</button>
           </form>
         </div>
       </div>
@@ -1125,9 +758,11 @@
       </div>
     </div>
   </section>
+  
+  <?php require_once('tools/footer.php') ?>
 
- <?php require_once('tools/footer.php') ?>
-  <script src="js/jquery.min.js"></script>
+
+<script src="js/jquery.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/SmoothScroll.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -1135,19 +770,6 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="js/script.min.js"></script>
-  <script>
-    document.getElementById("showRegister").addEventListener("click", function () {
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("registerForm").style.display = "block";
-        document.getElementById("authModalLabel").innerText = "Register";
-    });
 
-    document.getElementById("showLogin").addEventListener("click", function () {
-        document.getElementById("registerForm").style.display = "none";
-        document.getElementById("loginForm").style.display = "block";
-        document.getElementById("authModalLabel").innerText = "Login";
-    });
-</script>
-</body>
 
 </html>
