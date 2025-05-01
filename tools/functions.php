@@ -4,7 +4,7 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 
-define('BASE_URL', 'http://localhost/FinalProject');
+define('BASE_URL', 'http://localhost/FinalProject2');
 
 $conn = new mysqli("localhost", "root", "", "finalprojectdb");
 

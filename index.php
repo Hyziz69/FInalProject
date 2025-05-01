@@ -148,10 +148,7 @@
         <path fill="currentColor"
           d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
       </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="search" viewBox="0 0 24 24">
-        <path fill="currentColor"
-          d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-      </symbol>
+     
       <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 24 24">
         <path fill="currentColor"
           d="M15.71 12.71a6 6 0 1 0-7.42 0a10 10 0 0 0-6.22 8.18a1 1 0 0 0 2 .22a8 8 0 0 1 15.9 0a1 1 0 0 0 1 .89h.11a1 1 0 0 0 .88-1.1a10 10 0 0 0-6.25-8.19ZM12 12a4 4 0 1 1 4-4a4 4 0 0 1-4 4Z" />
@@ -266,13 +263,7 @@
                 </svg>
               </a>
             </li>
-            <li class="search-box" class="mx-2">
-              <a href="#search" class="search-button">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#search"></use>
-                </svg>
-              </a>
-            </li>
+            
           </ul>
         </div>
 
@@ -294,9 +285,7 @@
     <?php unset($_SESSION['message']); ?>
 <?php } ?>
         <div class="col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
-            repellat! Eveniet commodi voluptatem voluptate, eum minima, in suscipit explicabo voluptatibus harum,
-            quibusdam ex repellat eaque!</p>
+          <p>Step into the season with confidence—our brand-new lineup of premium leather jackets, on-trend essentials, and statement pieces is here to refresh your wardrobe. Each piece is crafted for comfort, style, and lasting quality, so whether you’re dressing up for a night out or keeping it casual for day-to-day, you’ll always look and feel your best.</p>
         </div>
       </div>
       <div class="row">
@@ -397,7 +386,7 @@
           <div class="col-md-4">
             <div class="cat-item image-zoom-effect">
               <div class="image-holder">
-                <a href="index.html">
+                <a href="pages/women/women.php">
                   <img src="images/cat-item2.jpg" alt="categories" class="product-image img-fluid">
                 </a>
               </div>
@@ -431,7 +420,6 @@
     <div class="container">
       <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
         <h4 class="text-uppercase">Our New Arrivals</h4>
-        <a href="index.html" class="btn-link">View All Products</a>
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
@@ -509,7 +497,6 @@
     <div class="container">
       <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
         <h4 class="text-uppercase">Best Selling Items</h4>
-        <a href="index.html" class="btn-link">View All Products</a>
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
@@ -531,7 +518,13 @@
                   <h5 class="text-uppercase fs-5 mt-3">
                     <a href="index.html"><?php echo $bestSellingItem->name ?></a>
                   </h5>
-                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span><?php echo $bestSellingItem->price . "€"?></span></a>
+                  <span><?php echo $bestSellingItem->price . "€"?></span></a>
+                  <form action="cart/cart-manage/add-to-cart.php" method="POST">
+                    <input type="hidden" name="id" value="<?= $bestSellingItem->id ?>">
+                    <input type="hidden" name="name" value="<?= $bestSellingItem->name ?>">
+                    <input type="hidden" name="price" value="<?= $bestSellingItem->price ?>">
+                    <button class="border-0 rounded bg-black text-white">Add to cart</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -693,25 +686,9 @@
     </div>
   </section>
 
-  <section class="newsletter bg-light" style="background: url(images/pattern-bg.png) no-repeat;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8 py-5 my-5">
-          <div class="subscribe-header text-center pb-3">
-            <h3 class="section-title text-uppercase">Sign Up for our newsletter</h3>
-          </div>
-          <form id="form" class="d-flex flex-wrap gap-2">
-            <input type="email" name="email" placeholder="Your Email Addresss" class="form-control form-control-lg">
-            <button type="submit" class="btn btn-dark btn-lg text-uppercase w-100" id="userEmail" onclick="sendEmail()">Sign up</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="instagram position-relative">
     <div class="d-flex justify-content-center w-100 position-absolute bottom-0 z-1">
-      <a href="https://www.instagram.com/templatesjungle/" class="btn btn-dark px-5">Follow us on Instagram</a>
+      <a href="https://www.instagram.com/lebrontheking228/" class="btn btn-dark px-5">Follow us on Instagram</a>
     </div>
     <div class="row g-0">
       <div class="col-6 col-sm-4 col-md-2">

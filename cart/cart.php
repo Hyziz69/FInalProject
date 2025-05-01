@@ -24,7 +24,6 @@
         <div class="items">
             <?php foreach ($items as $item): ?>
                 <div class="item-card">
-                    <img src="<?= 'images/' . htmlspecialchars($item->image) . '.jpg' ?>" alt="<?= htmlspecialchars($item->name) ?>">
                     <h3><?= htmlspecialchars($item->name) ?></h3>
                     <p>$<?= $item->price ?> × <?= $item->quantity ?></p>
                     <p><strong>Total:</strong> $<?= $item->getTotalPrice() ?></p>

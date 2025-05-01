@@ -20,7 +20,7 @@ class ClothesManager {
                 $row['name'],
                 $row['description'],
                 $row['price'],
-                $row['image']
+                $row['image_url']
             );
         }
 
@@ -34,7 +34,7 @@ class ClothesManager {
         $res = $stmt->get_result();
         $row = $res->fetch_assoc();
 
-        return new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['image']);
+        return new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['image_url']);
     }
 
     public function getClothesByType($type) {
@@ -45,9 +45,15 @@ class ClothesManager {
 
         $clothes = [];
         while ($row = $res->fetch_assoc()) {
-            $clothes[] = new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['image']);
+            $clothes[] = new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['image_url']);
         }
 
         return $clothes;
     }
+
+    public function getClothesByGender($gender) {
+    $stmt = $this->conn->prepare("SELECT * FROM clothes WHERE gender = ?");
+    $stmt->execute([$gender]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

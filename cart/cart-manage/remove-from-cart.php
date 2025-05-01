@@ -2,14 +2,14 @@
 require_once '../../classes/Cart.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-    $id = $_POST['id'];
+    $clothesId = (int) $_POST['id'];
 
-    $cart = new Cart();
-    $items = $cart->getItems();
-
-    if (isset($items[$id])) {
-        unset($items[$id]);
-        $_SESSION['cart'] = $items; 
+    try {
+        $cart = new Cart();
+        $cart->removeItem($clothesId);
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        exit;
     }
 }
 

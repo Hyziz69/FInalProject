@@ -33,7 +33,7 @@ if($res->num_rows > 0){
 }
 
 $password = password_hash($password, PASSWORD_DEFAULT);
-$sql = "INSERT INTO users (first_name, email, password) VALUES ('$first_name', '$email', '$password')";
+$sql = "INSERT INTO users (name, email, password) VALUES ('$first_name', '$email', '$password')";
 if($conn->query($sql)){
     login_user($email, $password);
     alert('success', 'Account created successfully');
@@ -42,3 +42,4 @@ if($conn->query($sql)){
     alert('danger', 'Failed to create account');
     die();
 }
+

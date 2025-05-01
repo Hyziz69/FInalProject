@@ -1,10 +1,20 @@
 <?php
-   include __DIR__ . '/../classes/Cart.php';
-   require_once('classes/Wishlist.php');
+   require_once 'classes/Cart.php';
+   require_once 'functions.php';
 
-   $wishlist = new Wishlist();
-   $cart = new Cart();
-   $cart_length = $cart->getLength();
+   if(isLoggedIn()){
+     require_once('classes/Wishlist.php');
+
+     try {
+      $wishlist = new Wishlist();
+      $cart = new Cart();
+      $cart_length = $cart->getLength();
+     } catch (Exception $e) {
+         $cartCount = 0;
+     }
+   }
+
+   
 ?>
 <nav class="navbar navbar-expand-lg bg-light text-uppercase fs-6 p-3 border-bottom align-items-center">
   
@@ -19,154 +29,15 @@
           </svg>
         </a>
       </div>
-      <div class="col-auto">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-      aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-        aria-label="Close"></button>
-      </div>
-      
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 gap-md-5 pe-3">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="dropdownHome" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Home</a>
-            <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Home Layout 1</a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Home Layout 2 </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Home Layout 3 </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Home Layout 4 </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Shop</a>
-            <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownShop">
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Sidebar </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Three Column </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Three Column Wide </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Four Column </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Four Column Wide </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Six Column </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Shop Six Column Wide </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Single Product </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Single Product V2 </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownBlog" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Blog</a>
-            <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownBlog">
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Blog Classic </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Blog Grid with Sidebar </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Blog Grid Four Column </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Blog No Sidebar </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Blog Right Sidebar </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Single Post </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Single Post No Sidebar </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Pages</a>
-            <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">About </a>
-              </li>
-              <li>
-                <a href="cart.php" class="dropdown-item item-anchor">Cart </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Checkout </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Coming Soon </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Contact </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Error Page </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">FAQs </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">My Account </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Order Tracking </a>
-              </li>
-              <li>
-                <a href="index.html" class="dropdown-item item-anchor">Wishlist </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/contact/contact.php">Contact</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-3 col-lg-auto">
+        <div class="d-flex align-items-stretch col-3 col-lg-auto">
           <ul class="list-unstyled d-flex m-0">
             <?php 
             if(isLoggedIn()) {
             ?>
               <li class="d-none d-lg-block d-flex justify-content-evenly align-items-center">
-              <h6 href="index.html" class="text-uppercase mt-1 mx-3">Hello <?= $_SESSION['user']['first_name']?></span>
+              <h6 href="index.html" class="text-uppercase mt-1 mx-3">Hello <?= $_SESSION['user']['name']?></span>
             </h6>
             </li>
               <li class="d-none d-lg-block">
@@ -200,12 +71,12 @@
               <?php } ?>
 
               <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="authModalLabel">Login</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="authModalLabel">Login</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
             <div class="modal-body">
                 <!-- Login Form -->
                 <form id="loginForm" action="loginLogic.php" method="POST">
@@ -250,3 +121,27 @@
             </div>
         </div>
     </div>
+                </div>
+                <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const showRegister = document.getElementById('showRegister');
+    const showLogin = document.getElementById('showLogin');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const modalTitle = document.getElementById('authModalLabel');
+
+    showRegister.addEventListener('click', function (e) {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'block';
+      modalTitle.textContent = 'Register';
+    });
+
+    showLogin.addEventListener('click', function (e) {
+      e.preventDefault();
+      registerForm.style.display = 'none';
+      loginForm.style.display = 'block';
+      modalTitle.textContent = 'Login';
+    });
+  });
+</script>
