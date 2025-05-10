@@ -1,15 +1,16 @@
 <?php
-require_once '../tools/functions.php';           // for $conn, session, and isLoggedIn()
+require_once '../classes/Database.php';
+require_once '../tools/functions.php';         
 require_once '../classes/WishlistItem.php';
 require_once '../classes/Wishlist.php';
-require_once '../classes/CartItem.php';          // if needed later
+require_once '../classes/CartItem.php';      
 
 if (!isLoggedIn()) {
     header("Location: ../login.php");
     exit();
 }
-
-$wishlist = new Wishlist();                      // uses global $conn and $_SESSION['user']
+$conn = Database::getConnection();     
+$wishlist = new Wishlist($conn);                              
 $items = $wishlist->getItems();
 ?>
 

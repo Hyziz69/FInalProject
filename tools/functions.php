@@ -1,48 +1,26 @@
 <?php
 
-if(session_status() == PHP_SESSION_NONE){
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 define('BASE_URL', 'http://localhost/FinalProject2');
 
-$conn = new mysqli("localhost", "root", "", "finalprojectdb");
-
-function url($path = "/"){
-    return BASE_URL.$path;
+function url(string $path = "/"): string {
+    return BASE_URL . $path;
 }
 
-function isLoggedIn(){
-    if(isset($_SESSION['user'])){
-        return true;
-    } else {
-        return false;
-    }
+function alert(string $type, string $message): void {
+    $_SESSION['alert'] = [
+        'type' => $type,
+        'message' => $message
+    ];
 }
 
-
-function alert($type, $message){
-    $_SESSION['alert']['type'] = $type;
-    $_SESSION['alert']['message'] = $message;
+function isLoggedIn(): bool {
+    return isset($_SESSION['user']);
 }
 
-function login_user($email, $password){
-
-    global $conn;
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $res = $conn->query($sql);
-
-    if($res->num_rows < 1){
-        return false;
-    }
-
-    $row = $res->fetch_assoc();
-
-    if(!password_verify($password, $row['password'])){
-        return false;
-    }
-
-    $_SESSION['user'] = $row; 
-
-    return true;
+function currentUser(): ?array {
+    return $_SESSION['user'] ?? null;
 }

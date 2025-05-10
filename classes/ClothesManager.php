@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Clothes.php';
-require_once 'tools/functions.php';
+require_once(__DIR__ . '/../tools/functions.php');
 
 class ClothesManager {
     private $conn;
@@ -20,6 +20,8 @@ class ClothesManager {
                 $row['name'],
                 $row['description'],
                 $row['price'],
+                $row['gender'],
+                $row['type'],
                 $row['image_url']
             );
         }
@@ -28,14 +30,26 @@ class ClothesManager {
     }
 
     public function getClothesById($id) {
-        $stmt = $this->conn->prepare("SELECT * FROM clothes WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $res = $stmt->get_result();
-        $row = $res->fetch_assoc();
+    $stmt = $this->conn->prepare("SELECT * FROM clothes WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        return new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['image_url']);
+    if ($row = $result->fetch_assoc()) {
+        return new Clothes(
+            $row['id'],
+            $row['name'],
+            $row['description'],
+            $row['price'],
+            $row['gender'],
+            $row['type'],
+            $row['image_url'],
+        );
     }
+
+    return null;
+}
+
 
     public function getClothesByType($type) {
         $stmt = $this->conn->prepare("SELECT * FROM clothes WHERE type = ?");
@@ -45,7 +59,7 @@ class ClothesManager {
 
         $clothes = [];
         while ($row = $res->fetch_assoc()) {
-            $clothes[] = new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['image_url']);
+            $clothes[] = new Clothes($row['id'], $row['name'], $row['description'], $row['price'], $row['gender'], $row['type'], $row['image_url']);
         }
 
         return $clothes;

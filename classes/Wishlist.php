@@ -11,16 +11,13 @@ class Wishlist {
     public function __construct(){
         global $conn;
 
-        if(!isLoggedIn()){
-            throw new Exception("User must be logged in to use wishlist.");
-        }
-
         $this->conn = $conn;
         $this->userId = $_SESSION['user']['id'];
     }
 
     private function getOrCreateWishlistId() {
-        $stmt = $this->conn->prepare("SELECT id FROM wishlist WHERE users_id = 1");
+        $stmt = $this->conn->prepare("SELECT id FROM wishlist WHERE users_id = ?");
+        $stmt->bind_param("i", $this->userId);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -28,7 +25,8 @@ class Wishlist {
             return $row['id'];
         }
 
-        $stmt = $this->conn->prepare("INSERT INTO wishlist (users_id) VALUES (1)");
+        $stmt = $this->conn->prepare("INSERT INTO wishlist (users_id) VALUES (?)");
+        $stmt->bind_param("i", $this->userId);
         $stmt->execute();
         return $this->conn->insert_id;
     }
@@ -94,13 +92,13 @@ class Wishlist {
     public function moveItemToCart($clothesId, $item) {
         $this->removeItem($clothesId);
 
-        $cart = new Cart(); // You’ll want to refactor Cart just like this class
+        $cart = new Cart(); 
         $cart->addItem($item);
     }
 
     public function moveAllToCart() {
     $items = $this->getItems();
-    $cart = new Cart(); // assuming it uses DB and knows the user ID
+    $cart = new Cart();
 
     foreach ($items as $item) {
         // Convert WishlistItem to CartItem (default quantity = 1)

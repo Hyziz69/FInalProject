@@ -1,16 +1,20 @@
 <?php
 
+session_start();
+
+require_once '../../classes/Database.php';
 require_once '../../classes/Wishlist.php';
 require_once '../../classes/CartItem.php';
+require_once '../../classes/Cart.php'; 
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $conn = Database::getConnection();
 
-    $wishlist = new Wishlist();
+    $wishlist = new Wishlist($conn);
     $items = $wishlist->getItems();
 
-    $cart = new Cart();
-    foreach($items as $item){
+    $cart = new Cart($conn);
+    foreach ($items as $item) {
         $cartItem = new CartItem($item->id, $item->name, $item->price);
         $cart->addItem($cartItem);
     }

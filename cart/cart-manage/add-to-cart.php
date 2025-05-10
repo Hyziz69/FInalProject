@@ -1,7 +1,9 @@
 <?php
 require_once '../../classes/Cart.php';
+require_once '../../classes/Database.php';
 
-$cart = new Cart();
+$conn = Database::getConnection();
+$cart = new Cart($conn);
 
 $id = $_POST['id'];
 $name = $_POST['name'];

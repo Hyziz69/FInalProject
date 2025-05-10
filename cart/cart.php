@@ -1,7 +1,9 @@
 <?php 
     require_once '../classes/Cart.php';
+    require_once '../classes/Database.php';
 
-    $cart = new Cart();
+    $conn = Database::getConnection();
+    $cart = new Cart($conn);
     $items = $cart->getItems();
     $total = $cart->getTotal();
 ?>
@@ -27,6 +29,12 @@
                     <h3><?= htmlspecialchars($item->name) ?></h3>
                     <p>$<?= $item->price ?> × <?= $item->quantity ?></p>
                     <p><strong>Total:</strong> $<?= $item->getTotalPrice() ?></p>
+
+                    <form method="POST" action="cart-manage/change-quantity.php">
+                        <input type="hidden" name="item_id" value="<?= $item->id ?>">
+                        <input type="number" name="quantity" value="<?= $item->quantity ?>" min="1" max="99">
+                        <button class="btn" type="submit">Update</button>
+                    </form>
 
                     <form method="POST" action="cart-manage/remove-from-cart.php">
                         <input type="hidden" name="id" value="<?= $item->id ?>">
