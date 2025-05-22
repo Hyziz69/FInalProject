@@ -2,13 +2,41 @@
 class User {
     private $db;
 
-    public function __construct(Database $database) {
-        $this->db = $database->getConnection();
+    public function __construct(mysqli $connection) {
+        $this->db = $connection;
+        $this->ensureSessionStarted();
     }
 
+    // Session/Utility methods from functions.php
+    private function ensureSessionStarted(): void {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
+    public static function baseUrl(string $path = "/"): string {
+        return 'http://localhost/FinalProject2' . $path;
+    }
+
+    public static function alert(string $type, string $message): void {
+        $_SESSION['alert'] = [
+            'type' => $type,
+            'message' => $message
+        ];
+    }
+
+    public static function isLoggedIn(): bool {
+        return isset($_SESSION['user']);
+    }
+
+    public static function currentUser(): ?array {
+        return $_SESSION['user'] ?? null;
+    }
+
+    // ---------- User actions ----------
     public function register($firstName, $email, $password, $passwordConfirm) {
         if ($this->hasEmptyFields([$firstName, $email, $password, $passwordConfirm])) {
-            alert('danger', 'All fields are required');
+            self::alert('danger', 'All fields are required');
             return false;
         }
 
@@ -17,7 +45,7 @@ class User {
         }
 
         if ($this->emailExists($email)) {
-            alert('danger', 'Account with this email already exists');
+            self::alert('danger', 'Account with this email already exists');
             return false;
         }
 
@@ -28,7 +56,7 @@ class User {
         if ($stmt->execute()) {
             return true;
         } else {
-            alert('danger', 'Failed to create account');
+            self::alert('danger', 'Failed to create account');
             return false;
         }
     }
@@ -44,9 +72,8 @@ class User {
         return true;
     }
 
-    // ---------------- Private methods ----------------
-
-    private function hasEmptyFields(array $fields) {
+    // ---------- Private methods ----------
+    private function hasEmptyFields(array $fields): bool {
         foreach ($fields as $field) {
             if (empty(trim($field))) {
                 return true;
@@ -55,21 +82,21 @@ class User {
         return false;
     }
 
-    private function isPasswordValid($password, $confirm) {
+    private function isPasswordValid($password, $confirm): bool {
         if ($password !== $confirm) {
-            alert('danger', 'Passwords do not match');
+            self::alert('danger', 'Passwords do not match');
             return false;
         }
 
         if (strlen($password) < 6) {
-            alert('danger', 'Password must be at least 6 characters');
+            self::alert('danger', 'Password must be at least 6 characters');
             return false;
         }
 
         return true;
     }
 
-    private function emailExists($email) {
+    private function emailExists($email): bool {
         $stmt = $this->db->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();

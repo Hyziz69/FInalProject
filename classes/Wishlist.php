@@ -2,7 +2,6 @@
 
 require_once 'WishlistItem.php';
 require_once 'Cart.php';
-require_once __DIR__ . '/../tools/functions.php';
 
 class Wishlist {
     private $conn;

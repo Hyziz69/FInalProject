@@ -2,7 +2,7 @@
 class Database {
     private static $conn;
 
-    public static function getConnection() {
+    public static function getConnection(): mysqli {
         if (!self::$conn) {
             self::$conn = new mysqli("localhost", "root", "", "finalprojectdb");
 

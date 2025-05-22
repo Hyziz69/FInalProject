@@ -1,7 +1,6 @@
 <?php
 
 require_once 'Clothes.php';
-require_once(__DIR__ . '/../tools/functions.php');
 
 class ClothesManager {
     private $conn;

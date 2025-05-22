@@ -1,19 +1,20 @@
 <?php
 require_once 'classes/Database.php';
-require_once 'tools/functions.php';
 require_once 'classes/User.php';
+
+session_start(); // Still needed here unless it's guaranteed to be called elsewhere
 
 $email = trim($_POST['email']);
 $password = $_POST['password'];
 
-// Create a Database object and pass it to User
-$database = new Database();
-$user = new User($database);
+$conn = Database::getConnection();
+$user = new User($conn);
 
 if ($user->login($email, $password)) {
-    alert('success', 'Logged in successfully');
+    User::alert('success', 'Logged in successfully');
 } else {
-    alert('danger', 'Invalid email or password');
+    User::alert('danger', 'Invalid email or password');
 }
 
 header('Location: index.php');
+exit;

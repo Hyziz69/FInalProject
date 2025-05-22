@@ -2,15 +2,17 @@
 
 require_once 'Database.php';
 require_once 'CartItem.php';
-require_once __DIR__ . '/../tools/functions.php';
+require_once 'User.php';
 
 class Cart {
     private $conn;
     private $userId;
 
     public function __construct() {
+        $conn = Database::getConnection();
+        $user = new User($conn);
         $this->conn = Database::getConnection(); 
-        $this->userId = $_SESSION['user']['id'];
+        $this->userId = $user->currentUser()['id'];
     }
 
     public function getOrCreateCartId() {

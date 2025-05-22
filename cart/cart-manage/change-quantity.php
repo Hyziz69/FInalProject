@@ -1,6 +1,5 @@
 <?php
 
-require_once '../../tools/functions.php';
 require_once '../../classes/Cart.php';
 require_once '../../classes/Database.php';
 

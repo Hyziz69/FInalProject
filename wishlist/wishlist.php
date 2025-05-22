@@ -1,11 +1,14 @@
 <?php
 require_once '../classes/Database.php';
-require_once '../tools/functions.php';         
 require_once '../classes/WishlistItem.php';
 require_once '../classes/Wishlist.php';
-require_once '../classes/CartItem.php';      
+require_once '../classes/CartItem.php';    
+require_once '../classes/User.php';  
 
-if (!isLoggedIn()) {
+$conn = Database::getConnection();
+$user = new User($conn);
+
+if (!$user->isLoggedIn()) {
     header("Location: ../login.php");
     exit();
 }

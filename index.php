@@ -1,5 +1,4 @@
 <?php 
-require_once('tools/functions.php');
 require_once('classes/Database.php');
 require_once('classes/Clothes.php');
 require_once('classes/ClothesManager.php');
